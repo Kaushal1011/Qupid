@@ -23,12 +23,12 @@ def user_helper(user) -> dict:
     }
 
 
-# def wishuser_helper(user) -> dict:
-#     return{
-#         "role": user["role"],
-#         "specialities": user["specialities"],
-#         "organisation": user["organisation"],
-#     }
+def wishuser_helper(user) -> dict:
+    return{
+        "role": user["role"],
+        "specialities": user["specialities"],
+        "organisation": user["organisation"],
+    }
 
 
 async def retrieve_users():
