@@ -8,6 +8,7 @@ client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_DETAILS)
 database = client.qupid
 
 users_collection = database.get_collection("users_collection")
+wishusers_collection = database.get_collection("wishusers_collection")
 
 
 def user_helper(user) -> dict:
@@ -22,6 +23,14 @@ def user_helper(user) -> dict:
     }
 
 
+# def wishuser_helper(user) -> dict:
+#     return{
+#         "role": user["role"],
+#         "specialities": user["specialities"],
+#         "organisation": user["organisation"],
+#     }
+
+
 async def retrieve_users():
     users = []
     async for user in users_collection.find():
@@ -33,6 +42,19 @@ async def add_user(user_data: dict) -> dict:
     user = await users_collection.insert_one(user_data)
     new_user = await users_collection.find_one({"_id": user.inserted_id})
     return user_helper(new_user)
+
+
+async def add_wishuser(wishuser_data: dict) -> dict:
+    wishuser = await wishusers_collection.insert_one(wishuser_data)
+    wishnew_user = await wishusers_collection.find_one({"_id": wishuser.inserted_id})
+    return user_helper(wishnew_user)
+
+
+async def retrieve_wishusers():
+    wishusers = []
+    async for wishuser in wishusers_collection.find():
+        wishusers.append(wishuser_helper(wishuser))
+    return wishusers
 
 
 async def retrieve_users_pipeline():
