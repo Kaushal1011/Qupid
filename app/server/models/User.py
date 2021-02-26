@@ -35,7 +35,7 @@ class UpdateUserSchema(BaseModel):
     role: Optional[str]
     specialities: Optional[list]
     organisation: Optional[str]
-    pipelined: int = Optional[int]
+    pipelined: Optional[int]
 
     class Config:
         schema_extra = {
