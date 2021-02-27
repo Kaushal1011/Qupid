@@ -58,6 +58,12 @@ async def retrieve_wishusers():
     return wishusers
 
 
+async def retrieve_wishuser(id: str) -> dict:
+    wishuser = await wishusers_collection.find_one({"_id": ObjectId(id)})
+    if wishuser:
+        return wishuser_helper(wishuser)
+
+
 async def retrieve_users_pipeline():
     users = []
     async for user in users_collection.find({"pipelined": 0}):
@@ -65,7 +71,7 @@ async def retrieve_users_pipeline():
         if user:
             await users_collection.update_one(
                 {
-                    "_id": ObjectId(user_helper(id)["id"])
+                    "_id": ObjectId(user_helper(user)["id"])
                 },
                 {
                     "$set": {
