@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 model.bin
 *.pickle
+*.bin
 
 # C extensions
 *.so
