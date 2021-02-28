@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-
-import Box from "@material-ui/core/Box";
+// import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Typography from "@material-ui/core/Typography";
 
-import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-// import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -58,9 +49,9 @@ export default function Teams1(props) {
     const [state, setState] = React.useState({
         checkedA: true,
     });
-
     const handleChange = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked });
+        props.setBal(event.target.checked);
     };
     return (
         <>
@@ -97,6 +88,10 @@ export default function Teams1(props) {
                                         shrink: true,
                                     }}
                                     fullWidth
+                                    defaultValue={2}
+                                    onChange={(e) => {
+                                        props.setNomt(parseInt(e.target.value));
+                                    }}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -108,6 +103,10 @@ export default function Teams1(props) {
                                         shrink: true,
                                     }}
                                     fullWidth
+                                    defaultValue={2}
+                                    onChange={(e) => {
+                                        props.setNot(parseInt(e.target.value));
+                                    }}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -123,7 +122,13 @@ export default function Teams1(props) {
                                 />
                             </Grid>
                             <Grid item xs={12}>
-                                <Button variant="contained" color="secondary">
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={() => {
+                                        props.begincallback();
+                                    }}
+                                >
                                     Begin Process
                                 </Button>
                             </Grid>

@@ -145,7 +145,10 @@ async def recommend(data: Recommend):
     qupid_df = pd.read_pickle("qupiddf.pickle")
     new_model = Word2Vec.load('model.bin')
     for wuserid in data.wishuserids:
-        wuser = await retrieve_wishuser(wuserid)
+        try:
+            wuser = await retrieve_wishuser(wuserid)
+        except:
+            continue
         wwuser = wuser
         print(wwuser)
         try:

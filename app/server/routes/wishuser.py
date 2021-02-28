@@ -26,6 +26,7 @@ async def add_wishuser_data(wishuser: WishedUserSchema = Body(...)):
 @router.get("/", response_description="wishusers retrieved")
 async def get_wishusers():
     wishusers = await retrieve_wishusers()
+    wishusers.reverse()
     if wishusers:
         return ResponseModel(wishusers, "wishusers data retrieved successfully")
     return ResponseModel(wishusers, "Empty list returned")

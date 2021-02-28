@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import clsx from "clsx";
+import React, { useState } from "react";
+
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -8,17 +8,9 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 
 import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+
 import Link from "@material-ui/core/Link";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-// import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+
 import Navbar from "./components/navbar";
 import Teams1 from "./components/teams1";
 import Teams2 from "./components/teams2";
@@ -36,7 +28,7 @@ function Copyright() {
     );
 }
 
-const drawerWidth = 240;
+// const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -69,6 +61,73 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Recommend() {
     const classes = useStyles();
+    const [page, setPage] = useState(1);
+    // number of members in a team
+    const [nomt, setNomt] = useState(2);
+    // number of teams
+    const [not, setNot] = useState(2);
+    const [bal, setBal] = useState(true);
+    const [teamsmade, setTeams] = useState({});
+    function begincallback() {
+        setPage(2);
+        return;
+    }
+    function recommendcallback(wuserids) {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+            numberofmem: nomt,
+            numberofteams: not,
+            balance: bal,
+            wishuserids: wuserids,
+        });
+
+        var requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow",
+        };
+
+        fetch("http://localhost:8000/data/recommend", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result);
+                alert("your team recommendations are ready");
+                setTeams(result["data"]);
+                setPage(3);
+            })
+            .catch((error) => console.log("error", error));
+    }
+    let midjsx;
+    if (page === 1) {
+        midjsx = (
+            <Teams1
+                setNot={setNot}
+                setNomt={setNomt}
+                setBal={setBal}
+                begincallback={begincallback}
+            />
+        );
+    } else if (page === 2) {
+        midjsx = (
+            <Teams2
+                numberofmember={nomt}
+                numberofteam={not}
+                balance={bal}
+                teamscallback={recommendcallback}
+            />
+        );
+    } else {
+        midjsx = (
+            <Teams3
+                numberofmember={nomt}
+                numberofteam={not}
+                teams={teamsmade}
+            />
+        );
+    }
 
     return (
         <>
@@ -80,9 +139,7 @@ export default function Recommend() {
                     <div className={classes.appBarSpacer} />
 
                     <Container className={classes.container}>
-                        <Teams1 />
-                        <Teams2 />
-                        <Teams3 />
+                        {midjsx}
                         <Box pt={4}>
                             <Copyright />
                         </Box>
