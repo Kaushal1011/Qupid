@@ -19,8 +19,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Navbar from "./components/navbar";
-import HomeImg from "./img/home.png";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,13 +45,85 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "column",
     },
     fixedHeight: {
-        height: 1500,
+        height: 700,
     },
 }));
 
-export default function Teams1() {
+export default function Teams2(props) {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+    let rows = [];
+    for (var i = 0; i < props.numberofmember; i++) {
+        // note: we are adding a key prop here to allow react to uniquely identify each
+        // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
+        rows.push(
+            <>
+                <Grid item xs={4}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12}>
+                            <TextField
+                                id={i}
+                                label="Id of wish user"
+                                variant="filled"
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button variant="contained" color="secondary">
+                                Confirm Id
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid item xs={8}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12}>
+                            {/* role */}
+                            <TextField
+                                id={i}
+                                label="Role of wished user"
+                                variant="filled"
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={4}>
+                            {/* sp1 */}
+                            <TextField
+                                id={i}
+                                label="Speciality 1 of wished user"
+                                variant="filled"
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={4}>
+                            {/* sp2 */}
+                            <TextField
+                                id={i}
+                                label="Speciality 2 of wished user"
+                                variant="filled"
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={4}>
+                            {/* sp3 */}
+                            <TextField
+                                id={i}
+                                label="Speciality 3 of wished user"
+                                variant="filled"
+                                fullWidth
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            {/* button to create */}
+                            <Button variant="contained" color="secondary">
+                                Create Wished User
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </>
+        );
+    }
     return (
         <>
             <Grid container spacing={3}>
@@ -61,8 +131,7 @@ export default function Teams1() {
                 <Grid item xs={8}>
                     <Paper className={fixedHeightPaper}>
                         <Grid container spacing={3}>
-                            <Grid item xs={4}></Grid>
-                            <Grid item xs={8}></Grid>
+                            {rows}
                         </Grid>
                     </Paper>
                 </Grid>
@@ -77,3 +146,9 @@ export default function Teams1() {
         </>
     );
 }
+
+Teams2.defaultProps = {
+    numberofmember: 4,
+    numberofteams: 1,
+    balance: false,
+};

@@ -19,8 +19,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Navbar from "./components/navbar";
-import HomeImg from "./img/home.png";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -47,30 +45,53 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: "column",
     },
     fixedHeight: {
-        height: 1500,
+        height: 700,
     },
 }));
 
-export default function Teams1() {
+export default function Teams3(props) {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+    let rows = [];
+    for (var i = 0; i < props.numberofteams; i++) {
+        rows.push(
+            <>
+                <Grid item xs={12}>
+                    <Typography variant="h5">{"Team " + i}</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    {/* team members here */}
+                    Team members here
+                </Grid>
+            </>
+        );
+    }
     return (
         <>
             <Grid container spacing={3}>
                 {/* Chart */}
-                <Grid item xs={6}>
+                <Grid item xs={12}>
                     <Paper className={fixedHeightPaper}>
-                        <Typography variant="h3">
-                            How Team Creation Works.
-                        </Typography>
-                    </Paper>
-                </Grid>
-                <Grid item xs={6}>
-                    <Paper className={classes.paper}>
-                        <Typography variant="h3">Team Settings</Typography>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12}>
+                                <Typography variant="h4">
+                                    Your created teams
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Grid container spacing={3}>
+                                    {rows}
+                                </Grid>
+                            </Grid>
+                        </Grid>
                     </Paper>
                 </Grid>
             </Grid>
         </>
     );
 }
+
+Teams3.defaultProps = {
+    numberofmember: 4,
+    numberofteams: 3,
+};

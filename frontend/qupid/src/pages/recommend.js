@@ -21,6 +21,8 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Navbar from "./components/navbar";
 import Teams1 from "./components/teams1";
+import Teams2 from "./components/teams2";
+import Teams3 from "./components/teams3";
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -67,9 +69,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Recommend() {
     const classes = useStyles();
-    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-    const auth = window.localStorage.getItem("token") ? true : false;
-    const token = window.localStorage.getItem("token");
     return (
         <>
             <Navbar></Navbar>
@@ -81,6 +80,8 @@ export default function Recommend() {
 
                     <Container className={classes.container}>
                         <Teams1 />
+                        <Teams2 />
+                        <Teams3 />
                         <Box pt={4}>
                             <Copyright />
                         </Box>
