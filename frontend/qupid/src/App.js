@@ -1,31 +1,41 @@
-import * as React from "react";
-import Container from "@material-ui/core/Container";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import Link from "@material-ui/core/Link";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import red from "@material-ui/core/colors/red";
+import blue from "@material-ui/core/colors/blue";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
-function Copyright() {
+import Home from "./pages/home";
+import AddUser from "./pages/addusers";
+import Settings from "./pages/settings";
+import Recommend from "./pages/recommend";
+
+import "./App.css";
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: blue[700],
+        },
+        secondary: {
+            main: red[300],
+        },
+    },
+});
+
+function App() {
     return (
-        <Typography variant="body2" color="text.secondary" align="center">
-            {"Copyright © "}
-            <Link color="inherit" href="https://github.com/kaushal1011">
-                Qupid
-            </Link>{" "}
-            {new Date().getFullYear()}
-            {"."}
-        </Typography>
+        <div className="App">
+            <ThemeProvider theme={theme}>
+                <Router>
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/addusers" component={AddUser} />
+                        <Route exact path="/recommend" component={Recommend} />
+                        <Route exact path="/settings" component={Settings} />
+                    </Switch>
+                </Router>
+            </ThemeProvider>
+        </div>
     );
 }
 
-export default function App() {
-    return (
-        <Container maxWidth="sm">
-            <Box sx={{ my: 4 }}>
-                <Typography variant="h4" component="h1" gutterBottom>
-                    Create React App v5-alpha example
-                </Typography>
-                <Copyright />
-            </Box>
-        </Container>
-    );
-}
+export default App;
