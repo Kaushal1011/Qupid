@@ -20,7 +20,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Navbar from "./components/navbar";
-
+import Teams1 from "./components/teams1";
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
@@ -80,6 +80,7 @@ export default function Recommend() {
                     <div className={classes.appBarSpacer} />
 
                     <Container className={classes.container}>
+                        <Teams1 />
                         <Box pt={4}>
                             <Copyright />
                         </Box>
