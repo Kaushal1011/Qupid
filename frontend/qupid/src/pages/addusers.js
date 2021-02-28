@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,12 +11,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-// import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
+
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Navbar from "./components/navbar";
@@ -33,8 +28,6 @@ function Copyright() {
         </Typography>
     );
 }
-
-const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -68,8 +61,14 @@ const useStyles = makeStyles((theme) => ({
 export default function AddUser() {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-    const auth = window.localStorage.getItem("token") ? true : false;
-    const token = window.localStorage.getItem("token");
+    const [fullname, setFullname] = useState("");
+    const [email, setEmail] = useState("");
+    const [pass, setPass] = useState("");
+    const [role, setRole] = useState("");
+    const [sp1, setSp1] = useState("");
+    const [sp2, setSp2] = useState("");
+    const [sp3, setSp3] = useState("");
+    const [org, setOrg] = useState("");
     return (
         <>
             <Navbar></Navbar>
@@ -177,6 +176,9 @@ export default function AddUser() {
                                                 label="Fullname"
                                                 variant="filled"
                                                 fullWidth
+                                                onChange={(e) => {
+                                                    setFullname(e.target.value);
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -185,6 +187,9 @@ export default function AddUser() {
                                                 label="Email"
                                                 variant="filled"
                                                 fullWidth
+                                                onChange={(e) => {
+                                                    setEmail(e.target.value);
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -194,6 +199,9 @@ export default function AddUser() {
                                                 label="Password"
                                                 variant="filled"
                                                 fullWidth
+                                                onChange={(e) => {
+                                                    setPass(e.target.value);
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -202,6 +210,9 @@ export default function AddUser() {
                                                 label="Role"
                                                 variant="filled"
                                                 fullWidth
+                                                onChange={(e) => {
+                                                    setRole(e.target.value);
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={4}>
@@ -210,6 +221,9 @@ export default function AddUser() {
                                                 label="Specialisation 1"
                                                 variant="filled"
                                                 fullWidth
+                                                onChange={(e) => {
+                                                    setSp1(e.target.value);
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={4}>
@@ -218,6 +232,9 @@ export default function AddUser() {
                                                 label="Specialisation 2"
                                                 variant="filled"
                                                 fullWidth
+                                                onChange={(e) => {
+                                                    setSp2(e.target.value);
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={4}>
@@ -226,6 +243,9 @@ export default function AddUser() {
                                                 label="Specialisation 3"
                                                 variant="filled"
                                                 fullWidth
+                                                onChange={(e) => {
+                                                    setSp3(e.target.value);
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
@@ -234,12 +254,66 @@ export default function AddUser() {
                                                 label="Organisation"
                                                 variant="filled"
                                                 fullWidth
+                                                onChange={(e) => {
+                                                    setOrg(e.target.value);
+                                                }}
                                             />
                                         </Grid>
                                         <Grid item xs={12}>
                                             <Button
                                                 variant="contained"
                                                 color="secondary"
+                                                onClick={() => {
+                                                    var myHeaders = new Headers();
+                                                    myHeaders.append(
+                                                        "Content-Type",
+                                                        "application/json"
+                                                    );
+
+                                                    var raw = JSON.stringify({
+                                                        fullname: fullname,
+                                                        email: email,
+                                                        password: pass,
+                                                        role: role,
+                                                        specialities: [
+                                                            sp1,
+                                                            sp2,
+                                                            sp3,
+                                                        ],
+                                                        organisation: org,
+                                                        pipelined: 0,
+                                                    });
+
+                                                    var requestOptions = {
+                                                        method: "POST",
+                                                        headers: myHeaders,
+                                                        body: raw,
+                                                        redirect: "follow",
+                                                    };
+
+                                                    fetch(
+                                                        "http://localhost:8000/user/",
+                                                        requestOptions
+                                                    )
+                                                        .then((response) =>
+                                                            response.text()
+                                                        )
+                                                        .then((result) => {
+                                                            console.log(result);
+                                                            alert(
+                                                                "Created New User"
+                                                            );
+                                                        })
+                                                        .catch((error) => {
+                                                            console.log(
+                                                                "error",
+                                                                error
+                                                            );
+                                                            alert(
+                                                                "error occured"
+                                                            );
+                                                        });
+                                                }}
                                             >
                                                 Create User
                                             </Button>

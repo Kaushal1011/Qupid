@@ -69,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Recommend() {
     const classes = useStyles();
+
     return (
         <>
             <Navbar></Navbar>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,14 +11,13 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
+
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import TextField from "@material-ui/core/TextField";
+// import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Navbar from "./components/navbar";
 import PeopleIcon from "@material-ui/icons/People";
@@ -39,7 +38,7 @@ function Copyright() {
     );
 }
 
-const drawerWidth = 240;
+// const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -77,8 +76,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Settings() {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-    const auth = window.localStorage.getItem("token") ? true : false;
-    const token = window.localStorage.getItem("token");
     return (
         <>
             <Navbar></Navbar>
@@ -107,7 +104,33 @@ export default function Settings() {
                                                 <Button
                                                     variant="contained"
                                                     color="secondary"
-                                                    onClick={() => {}}
+                                                    onClick={() => {
+                                                        var requestOptions = {
+                                                            method: "GET",
+                                                            redirect: "follow",
+                                                        };
+
+                                                        fetch(
+                                                            "http://localhost:8000/data/updateds",
+                                                            requestOptions
+                                                        )
+                                                            .then((response) =>
+                                                                response.text()
+                                                            )
+                                                            .then((result) => {
+                                                                console.log(
+                                                                    result
+                                                                );
+                                                                alert(result);
+                                                            })
+                                                            .catch((error) => {
+                                                                console.log(
+                                                                    "error",
+                                                                    error
+                                                                );
+                                                                alert("error");
+                                                            });
+                                                    }}
                                                 >
                                                     Update dataset
                                                 </Button>
@@ -129,7 +152,33 @@ export default function Settings() {
                                                 <Button
                                                     variant="contained"
                                                     color="secondary"
-                                                    onClick={() => {}}
+                                                    onClick={() => {
+                                                        var requestOptions = {
+                                                            method: "GET",
+                                                            redirect: "follow",
+                                                        };
+
+                                                        fetch(
+                                                            "http://localhost:8000/data/refresh",
+                                                            requestOptions
+                                                        )
+                                                            .then((response) =>
+                                                                response.text()
+                                                            )
+                                                            .then((result) => {
+                                                                console.log(
+                                                                    result
+                                                                );
+                                                                alert(result);
+                                                            })
+                                                            .catch((error) => {
+                                                                console.log(
+                                                                    "error",
+                                                                    error
+                                                                );
+                                                                alert("error");
+                                                            });
+                                                    }}
                                                 >
                                                     Refresh Dataset
                                                 </Button>
@@ -151,7 +200,80 @@ export default function Settings() {
                                                 <Button
                                                     variant="contained"
                                                     color="secondary"
-                                                    onClick={() => {}}
+                                                    onClick={() => {
+                                                        var requestOptions = {
+                                                            method: "GET",
+                                                            redirect: "follow",
+                                                        };
+
+                                                        fetch(
+                                                            "http://localhost:8000/data/retrain",
+                                                            requestOptions
+                                                        )
+                                                            .then((response) =>
+                                                                response.text()
+                                                            )
+                                                            .then((result) => {
+                                                                console.log(
+                                                                    result
+                                                                );
+                                                                alert(result);
+                                                            })
+                                                            .catch((error) => {
+                                                                console.log(
+                                                                    "error",
+                                                                    error
+                                                                );
+                                                                alert("error");
+                                                            });
+                                                    }}
+                                                >
+                                                    Retrain Model
+                                                </Button>
+                                            </ListItemSecondaryAction>
+                                        </ListItem>
+                                    </List>
+                                    <List className={classes.root2}>
+                                        <ListItem fullwidth>
+                                            <ListItemIcon>
+                                                <DnsIcon />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                id="retrain"
+                                                primary="Retrain Core Word2Vec Model Without Pulling Tweets"
+                                                secondary="More details."
+                                            />
+                                            <ListItemSecondaryAction>
+                                                <Button
+                                                    variant="contained"
+                                                    color="secondary"
+                                                    onClick={() => {
+                                                        var requestOptions = {
+                                                            method: "GET",
+                                                            redirect: "follow",
+                                                        };
+
+                                                        fetch(
+                                                            "http://localhost:8000/data/retrainnotwts",
+                                                            requestOptions
+                                                        )
+                                                            .then((response) =>
+                                                                response.text()
+                                                            )
+                                                            .then((result) => {
+                                                                console.log(
+                                                                    result
+                                                                );
+                                                                alert(result);
+                                                            })
+                                                            .catch((error) => {
+                                                                console.log(
+                                                                    "error",
+                                                                    error
+                                                                );
+                                                                alert("error");
+                                                            });
+                                                    }}
                                                 >
                                                     Retrain Model
                                                 </Button>
@@ -173,7 +295,33 @@ export default function Settings() {
                                                 <Button
                                                     variant="contained"
                                                     color="secondary"
-                                                    onClick={() => {}}
+                                                    onClick={() => {
+                                                        var requestOptions = {
+                                                            method: "GET",
+                                                            redirect: "follow",
+                                                        };
+
+                                                        fetch(
+                                                            "http://localhost:8000/data/maintain",
+                                                            requestOptions
+                                                        )
+                                                            .then((response) =>
+                                                                response.text()
+                                                            )
+                                                            .then((result) => {
+                                                                console.log(
+                                                                    result
+                                                                );
+                                                                alert(result);
+                                                            })
+                                                            .catch((error) => {
+                                                                console.log(
+                                                                    "error",
+                                                                    error
+                                                                );
+                                                                alert("error");
+                                                            });
+                                                    }}
                                                 >
                                                     Maintain
                                                 </Button>
