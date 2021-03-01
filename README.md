@@ -1,5 +1,6 @@
 # Qupid
-Qupid is a matchmaking service that is responsible for creating efficient teams for workplaces and classes.
+
+Qupid is a matchmaking service that is responsible for creating efficient teams for workplaces and classes. More details in [Presentation](Qupid_ Teams_Matchmaking_Service.pdf)
 
 ![flow](Qupid.png)
 
