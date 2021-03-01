@@ -1,6 +1,8 @@
 # Qupid
 Qupid is a matchmaking service that is responsible for creating efficient teams for workplaces and classes.
 
+![flow](Qupid.png)
+
 Requires:
 
 - Python & all listed requirements : FastAPI, Gensim, Matplotlib, Scikit-Learn, Pandas, Numpy, etc.
