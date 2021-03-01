@@ -140,6 +140,7 @@ async def dataset_update():
 @router.post("/recommend", response_description="endpoint that recommends team based on settings and artifical profile")
 async def recommend(data: Recommend):
     teamresponse = {}
+    hashtab = {}
     tempres = {}
     teamresponse["metadata"] = data
     qupid_df = pd.read_pickle("qupiddf.pickle")
@@ -187,20 +188,44 @@ async def recommend(data: Recommend):
         qupid_df.to_pickle("qupiddf.pickle")
         columns = ["_id", "fullname", "email",
                    "role", "specialities", "organisation"]
-
+        # not*nom n largest to makes sure theres always enough members to create mutually exclusive sets for members
         tempres[wuserid] = qupid_df.nlargest(
-            data.numberofteams, columns=["sim"+wwuser["id"]])[columns].to_dict(orient="records")
-        if data.balance:
-            random.shuffle(tempres[wuserid])
+            data.numberofteams*data.numberofmem, columns=["sim"+wwuser["id"]])[columns].to_dict(orient="records")
+        # change balance logic
+        # if data.balance:
+        #     random.shuffle(tempres[wuserid])
 
+    rearrs = []
     for i in range(1, data.numberofteams+1):
         teamresponse["team"+str(i)] = []
+        rearrs.append([])
+    upperindex = -1
+    # print(tempres)
     for key in tempres.keys():
         index = 1
+        upperindex += 1
         for i in tempres[key]:
-            teamresponse["team"+str(index)].append(i)
-            index += 1
-
+            # print(i)
+            try:
+                if i['_id'] not in hashtab:
+                    rearrs[upperindex].append(i)
+                    hashtab[i['_id']] = i
+                    index += 1
+                if index > data.numberofteams:
+                    break
+            except Exception as e:
+                print("passed excepting here ", e)
+    # print(rearrs)
+    if data.balance:
+        for elem in rearrs:
+            random.shuffle(elem)
+    for i in range(1, data.numberofteams+1):
+        for elem in rearrs:
+            try:
+                teamresponse["team"+str(i)].append(elem[i-1])
+            except Exception as e:
+                print("some expect here:", e)
+    # print(teamresponse)
     return RecommendResponse(teamresponse, "Here are your built teams!")
 
 
