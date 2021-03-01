@@ -1,3 +1,4 @@
+from functools import lru_cache
 from matplotlib import pyplot
 from sklearn.decomposition import PCA
 import shutil
@@ -16,6 +17,11 @@ from nltk.corpus import stopwords
 from sklearn.cluster import KMeans
 import shutil
 stop_words = set(stopwords.words('english'))
+
+
+@lru_cache()
+def get_settings():
+    return Settings()
 
 
 def pull_tweets():
@@ -212,8 +218,14 @@ def create_url_more(query, next_token):
 
 
 def auth():
-    return "AAAAAAAAAAAAAAAAAAAAAC6vMwEAAAAA5uumFGxBM1e4Kfyfr8E5TJseEZw%3DHV6mjkDp1QrpVm1bpi2yZrvAEkpqhxCK91fGkjl5gevPwtLScM"
+    try:
+        with open("settings.env") as f:
+            a = json.load(f)
+            print(a)
+            return a
+    except:
+        print("Twitter API key not found")
 
 
 if __name__ == "__main__":
-    retrain_model(True)
+    print(auth())

@@ -5,6 +5,7 @@ __pycache__/
 model.bin
 *.pickle
 *.bin
+*.env
 
 # C extensions
 *.so
