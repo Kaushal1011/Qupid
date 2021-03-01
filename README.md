@@ -4,7 +4,7 @@ Qupid is a matchmaking service that is responsible for creating efficient teams 
 
 ## Pipeline 
 
-![pipeline](AOBD Data Pipeline Model.png)
+![pipeline](AOBDDataPipelineModel.png)
 
 ## Current Core Word2Vec Model Insight
 
@@ -12,4 +12,4 @@ Qupid is a matchmaking service that is responsible for creating efficient teams 
 
 ## Algorithm
 
-![algorithm](AOBD Algorithm.png)
+![algorithm](AOBDAlgorithm.png)
