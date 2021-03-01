@@ -6,6 +6,14 @@ Requires:
 - Python & all listed requirements : FastAPI, Gensim, Matplotlib, Scikit-Learn, Pandas, Numpy, etc.
 - MongoDB
 
+Info:
+
+- Pictures of screens in [screens folder](screens)
+- Word2Vec Analysis Images [analysis folder](analysis)
+- Research and Experiments on model done in [Notebook](Data&Word2Vec.ipynb)
+- Pipeline related, training model & generating insights code in [Pipeline route](app/server/routes/pipeline.py) & [Train Script](app/server/routes/model/train.py)
+- Backend Code in [Server](app/server)
+- Frontend Code in [Qupid FE](frontend/qupid)
 ## How to run
 
 - Make sure you add you own twitter api key in `settings.env` as `"TW_KEY":"your_key_here"` in folder `app/server/routes/model/` 
