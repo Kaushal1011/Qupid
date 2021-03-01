@@ -8,7 +8,7 @@ Qupid is a matchmaking service that is responsible for creating efficient teams 
 
 ## Current Core Word2Vec Model Insight
 
-![modelisight]('./currentmodelinsight.png')
+![modelisight]('currentmodelinsight.png')
 
 ## Algorithm
 
