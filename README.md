@@ -8,6 +8,8 @@ Requires:
 
 ## How to run
 
+- Make sure you add you own twitter api key in `settings.env` as `"TW_KEY":"your_key_here"` in folder `app/server/routes/model/` 
+
 ### backend
 
 ```
@@ -22,6 +24,32 @@ cd frontend/qupid
 npm start
 ```
 > Simple React + Material UI frontend 
+
+## How to Use ? 
+
+### Find team recommendations
+
+#### Team Settings 
+
+![team1](screens/recommend1.png)
+
+#### Wish for certain kind of profiles
+
+![team2](screens/recommend2.png)
+
+#### Get Teams
+
+![team3](screens/teams.png)
+
+### Perform Pipeline realted functionality
+
+![pipeline](screens/pipelinesettings.png)
+
+### Add users to user database
+
+![adduser](screens/addusersdb.png)
+
+### Recommendation System
 
 ## Pipeline 
 
